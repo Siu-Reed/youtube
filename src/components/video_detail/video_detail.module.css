@@ -1,0 +1,111 @@
+.detail {
+    position: relative;
+    flex: 1 1 70%;
+    
+    display: flex;
+    flex-flow: column nowrap;
+}
+.doubleViewTrue .vidFrame {
+    border: 1px solid #000000;
+    background: #000000;
+}
+.doubleViewFalse .vidFrame {
+    border: 0.3em solid #afafaf;
+    background: #afafaf;
+}
+.vidFrame {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.btnCont {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    padding: 0 0.3rem;
+    border-radius: 0 0 40% 40%;
+    background: #afafaf;
+    opacity: 0;
+    transition: 0.3s;
+}
+.vidFrame:hover .btnCont{
+    opacity: 1;
+}
+.btnCont button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    fill: #ffffff;
+    width: 1.5rem;
+    padding: 0.1rem;
+    opacity: 0.5;
+    top: 1em;
+    right: 1em;
+    transition: 0.5s;
+}
+.btnCont button:hover {
+    opacity: 1;
+    transform: rotateZ(360deg);
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+}
+
+
+.vidMeta {
+    height: 50%;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    gap: 1em;
+    padding: 1rem;
+}
+
+.vidMeta h2 {
+    padding: 0 5rem 0 0;
+    font-weight: lighter;
+}
+.vidMeta h3 {
+    font-weight: normal;
+    width: max-content;
+    color: #000000b0;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+.circle {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 50%;
+    background: linear-gradient(to bottom right, #ed3e63, #afafaf);
+}
+
+.description {
+    height: 50%;
+    white-space: pre-wrap;
+    overflow: scroll;
+    font-size: 0.8rem;
+    background: #00000005;
+    padding: 1em;
+    border-radius: 1em;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.metaClose {
+    position: absolute;
+    right: 1rem;
+    top: 1em;
+}
+
+@media (orientation: portrait) {
+    .doubleViewFalse {
+        height: 80%;
+    }
+    .doubleViewTrue {
+        height: 50%;
+    }
+}

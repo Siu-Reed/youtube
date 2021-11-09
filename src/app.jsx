@@ -1,42 +1,53 @@
-import React, { Component } from 'react';
-import './app.css';
-import PopularList from './components/popularList';
-import SearchHeader from './components/searchHeader';
-import Video from './components/video';
+import React, { useCallback, useEffect, useState } from 'react';
+import styles from './app.module.css';
+import VideoList from './components/video_list/video_list';
+import SearchHeader from './components/search_header/search_header';
+import VideoDetail from './components/video_detail/video_detail';
 
-class App extends Component {
-    state = {
-        items : [],
-        selectedVid : null
-    }
+function App({ youtube }) {
+    const [videos, setVideos] = useState([]);
+    const [selectedVideo1, setSelectedVideo1] = useState(null);
+    const [selectedVideo2, setSelectedVideo2] = useState(null);
+    const [doubleView, setDoubleView] = useState(false);
 
-    componentDidMount() {
-        this.props.youtube.popular()
-        .then(result => this.setState({items : result}))
-        .catch(error => console.log('error', error));
-    }
+    const selectVideo = video => {
+        !(selectedVideo1) ? setSelectedVideo1(video) : setSelectedVideo2(video);
+    };
 
-    search(keyword) {
-        this.props.youtube.search(keyword)
-        .then(result => this.setState({items : result}))
-        .catch(error => console.log('error', error));
-    }
+    useEffect(() => {
+        (selectedVideo1 && selectedVideo2) ? setDoubleView(true) : setDoubleView(false);
+    }, [selectedVideo1, selectedVideo2]);
+    
+    const dvStyle = doubleView ? styles.dbViewTrue : styles.dbViewFalse;
 
-    videoSelection = (id) => {
-        this.setState({
-            selectedVid: id
-        })
-    }
+    const search = useCallback(
+        query => {
+        youtube
+            .search(query) //
+            .then(videos => setVideos(videos));
+        },
+        [youtube]
+    );
 
-    render() {
-        return (
-            <>
-                <SearchHeader search={this.search.bind(this)}/>
-                {this.state.selectedVid && <Video id={this.state.selectedVid}/>}
-                <PopularList items={this.state.items} selection={this.videoSelection}/>
-            </>
-        );
-    }
+    useEffect(() => {
+        youtube
+        .mostPopular() //
+        .then(videos => setVideos(videos));
+    }, [youtube]);
+    return (
+        <div className={styles.app}>
+            { (!doubleView) && <SearchHeader onSearch={search} /> }
+            <section className={`${styles.content} ${dvStyle}`}>
+                {selectedVideo1 && <VideoDetail video={selectedVideo1} closeVid={setSelectedVideo1} doubleView={doubleView}/>}
+                {selectedVideo2 && <VideoDetail video={selectedVideo2} closeVid={setSelectedVideo2} doubleView={doubleView}/>}
+                {!(selectedVideo1 && selectedVideo2) && <VideoList
+                    videos={videos}
+                    onVideoClick={selectVideo}
+                    display={(selectedVideo1||selectedVideo2) ? 'list' : 'grid'}
+                />}
+            </section>
+        </div>
+    );
 }
 
 export default App;

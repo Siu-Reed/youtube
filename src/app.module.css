@@ -1,0 +1,24 @@
+.app {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content {
+    width: 100%;
+    /* header height */
+    display: flex;
+}
+
+.dbViewFalse {
+    height: calc(100vh - 6rem);
+}
+.dbViewTrue {
+    height: 100vh;
+}
+
+@media (orientation: portrait) {
+    .content {
+        flex-direction: column;
+    }
+}
