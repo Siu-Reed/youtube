@@ -9,6 +9,8 @@ function App({ youtube }) {
     const [selectedVideo1, setSelectedVideo1] = useState(null);
     const [selectedVideo2, setSelectedVideo2] = useState(null);
     const [doubleView, setDoubleView] = useState(false);
+    const [nextPageToken, setNextPageToken] = useState(null);
+    const [nowQuery, setnowQuery] = useState(null);
 
     const selectVideo = video => {
         !(selectedVideo1) ? setSelectedVideo1(video) : setSelectedVideo2(video);
@@ -20,14 +22,25 @@ function App({ youtube }) {
     
     const dvStyle = doubleView ? styles.dbViewTrue : styles.dbViewFalse;
 
-    const search = useCallback(
-        query => {
+    const search = useCallback((query) => {
+        setnowQuery(query);
         youtube
-            .search(query) //
-            .then(videos => setVideos(videos));
-        },
-        [youtube]
-    );
+        .search(query)
+        .then(videos => {
+            setVideos(videos[0]);
+            setNextPageToken(videos[1]);
+        });
+    },[youtube]);
+
+    const nextPage = useCallback(() => {
+        youtube
+        .nextPage(nowQuery, nextPageToken)
+        .then(videos => {
+            setVideos((preVideos) => preVideos.concat(videos[0]));
+            setNextPageToken(videos[1]);
+            console.log()
+        });
+    },[nextPageToken, nowQuery, youtube]);
 
     useEffect(() => {
         youtube
@@ -43,6 +56,8 @@ function App({ youtube }) {
                 {!(selectedVideo1 && selectedVideo2) && <VideoList
                     videos={videos}
                     onVideoClick={selectVideo}
+                    nextPage={nextPage}
+                    nextPageToken={nextPageToken}
                     display={(selectedVideo1||selectedVideo2) ? 'list' : 'grid'}
                 />}
             </section>

@@ -3,11 +3,31 @@
 
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     list-style: none;
     padding-left: 0;
     margin: 0;
     overflow-x: hidden;
     overflow-y: scroll;
+    padding: 1vh 0.5vw;
+}
+
+.next {
+    line-height: 3rem;
+    margin: 1rem;
+    width: 100%;
+    text-align: center;
+    background-color: #ed3e63;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 1rem;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.3s;
+}
+.next:hover {
+    background: #000000;
+    color: #ed3e63;
 }
 
 @media (orientation: portrait) {
@@ -15,5 +35,11 @@
         flex-flow: column wrap;
         overflow-x: scroll;
         overflow-y: hidden;
+    }
+    .next {
+        width: 3rem;
+        height: 100%;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
     }
 }
