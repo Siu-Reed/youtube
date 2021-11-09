@@ -19,15 +19,20 @@
     text-align: center;
     background-color: #ed3e63;
     color: #ffffff;
-    font-weight: bold;
+    font-weight: 500;
     border-radius: 1rem;
-    cursor: pointer;
     opacity: 0.9;
     transition: 0.3s;
 }
 .next:hover {
     background: #000000;
     color: #ed3e63;
+}
+.more {
+    cursor: pointer;
+}
+.end {
+    cursor: no-drop;
 }
 
 @media (orientation: portrait) {

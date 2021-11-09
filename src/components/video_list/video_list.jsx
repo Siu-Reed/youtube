@@ -12,7 +12,7 @@ const VideoList = ({ videos, onVideoClick, nextPage, nextPageToken, display }) =
             display={display}
         />
         ))}
-        {nextPageToken && <div className={styles.next} onClick={nextPage}>View More</div>}
+        {nextPageToken ? <div className={`${styles.next} ${styles.more}`} onClick={nextPage}>View More</div> : <div className={`${styles.next} ${styles.end}`}>End.</div>}
     </ul>
 );
 

@@ -18,12 +18,14 @@ const SearchHeader = memo(({ onSearch }) => {
   };
   return (
     <header className={styles.header}>
-        <div className={styles.logo}>
-            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 80 80" xmlSpace="preserve">
-            <path xmlns="http://www.w3.org/2000/svg" d="M69.7,6.5H40H10.3c-1.9,0-3.5,1.6-3.5,3.5v59.4c0,1.9,1.6,3.5,3.5,3.5H40h29.7c1.9,0,3.5-1.6,3.5-3.5V54.6V39.7V10  C73.2,8.1,71.7,6.5,69.7,6.5z M66.2,51.1H43.5v-7.9h22.7V51.1z M66.2,13.5v22.7H43.5V13.5H66.2z M13.8,13.5h22.7v26.2v14.9v11.4  H13.8V13.5z M43.5,65.9v-7.9h22.7v7.9H43.5z"/>
-            </svg>
-            <h1 className={styles.title}><span>SIU</span>TUBE</h1>
-        </div>
+        <a href="https://siutube.netlify.app/">
+            <div className={styles.logo}>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 80 80" xmlSpace="preserve">
+                <path xmlns="http://www.w3.org/2000/svg" d="M69.7,6.5H40H10.3c-1.9,0-3.5,1.6-3.5,3.5v59.4c0,1.9,1.6,3.5,3.5,3.5H40h29.7c1.9,0,3.5-1.6,3.5-3.5V54.6V39.7V10  C73.2,8.1,71.7,6.5,69.7,6.5z M66.2,51.1H43.5v-7.9h22.7V51.1z M66.2,13.5v22.7H43.5V13.5H66.2z M13.8,13.5h22.7v26.2v14.9v11.4  H13.8V13.5z M43.5,65.9v-7.9h22.7v7.9H43.5z"/>
+                </svg>
+                <h1 className={styles.title}><span>SIU</span>TUBE</h1>
+            </div>
+        </a>
         <div className={styles.searchBar}>
             <input
                 ref={inputRef}
